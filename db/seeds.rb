@@ -13,17 +13,31 @@ require 'random_data'
 
   )
 end
+
+Post.find_or_create_by!(
+  id: 12345,
+  title: "Why is the sky blue?",
+  body: "Blue light is scattered in all directions by the tiny molecules of air in Earth's atmosphere.
+  Blue is scattered more than other colors because it travels as shorter, smaller waves.
+  This is why we see a blue sky most of the time. ...
+  Also, the surface of Earth has reflected and scattered the light."
+)
 # we call sample on the array returned by Post.all, in order to pick a random post
 # to associate each comment with. sample returns a random element
-post = Post.all
+posts = Post.all
 
 100.times do
   Comment.create!(
-    post: post.sample,
+    post: posts.sample,
     body: RandomData.random_paragraph
 
   )
 end
+
+Comment.find_or_create_by!(
+  post: Post.find(12345),
+  body: "Thanks for the informations!"
+)
 
 puts "Seed finished"
 puts "#{Post.count} post created"
