@@ -4,7 +4,7 @@ require 'rails_helper'
 RSpec.describe PostsController, type: :controller do
   let(:my_post) { Post.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph) }
 
-  describe "GET index" do
+  describe "Post index" do
     it "returns http success" do
       get :index
       expect(response).to have_http_status(:success)
@@ -17,7 +17,7 @@ RSpec.describe PostsController, type: :controller do
   end
 
 # when new is invoked a new and unsaved post object is created
-  describe "GET new" do
+  describe "Post new" do
     it "returns http success" do
       get :new
       expect(response).to have_http_status(:success)
@@ -53,12 +53,13 @@ RSpec.describe PostsController, type: :controller do
 
   end
 
-  describe "GET show" do
+  describe "Post show" do
     it "returns http success" do
       # we pass id as a parameter
       get :show, params: { id: my_post.id }
       expect(response).to have_http_status(:success)
     end
+
     it "renders the #show view" do
      # we expect the response to return the show view using render_template
       get :show, params: { id: my_post.id }
