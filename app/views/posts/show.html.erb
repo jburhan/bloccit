@@ -1,2 +1,11 @@
 <h1><%= @post.title %></h1>
- <p><%= @post.body %></p>
+
+<div class="new-post">
+  <div class="form-group">
+    <p><%= @post.body %></p>
+  </div>
+  <div class="edit-post">
+    <%= link_to "Edit", edit_post_path(@post), class: 'btn btn-success' %>
+    <%= link_to "Delete", @post, method: :delete, class: 'btn btn-delete', data: {confirm: "You are about to delete this post, proceed?"} %>
+  </div>
+</div>
