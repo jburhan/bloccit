@@ -6,6 +6,6 @@
   </div>
   <div class="edit-post">
     <%= link_to "Edit", edit_post_path(@post), class: 'btn btn-success' %>
-    <%= link_to "Delete", @post, method: :delete, class: 'btn btn-delete', data: {confirm: "You are about to delete this post, proceed?"} %>
+    <%= link_to "Delete", @post, method: :delete, class: 'btn btn-danger', data: {confirm: "You are about to delete this post, proceed?"} %>
   </div>
 </div>

@@ -1,0 +1,15 @@
+<h1><%= @question.title %></h1>
+
+<div class="resolved-button">
+    <%= @question.resolved %>
+</div>
+
+<div class="new-question">
+  <div class="form-group">
+    <p><%= @question.body %></p>
+  </div>
+  <div class="edit-question">
+    <%= link_to "Edit", edit_question_path(@question), class: 'btn btn-success' %>
+    <%= link_to "Delete", @question, method: :delete, class: 'btn btn-danger', data: {confirm: "You are about to delete this question, proceed?"} %>
+  </div>
+</div>
