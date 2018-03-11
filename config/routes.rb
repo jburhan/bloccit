@@ -9,6 +9,9 @@ Rails.application.routes.draw do
      resources :sponsored_posts
    end
 
+   #only hash key will prevent rails from creating other routes than new and create
+   resources :users, only: [:new, :create]
+
   get 'about' => 'welcome#about'
 
   get 'contact' => 'welcome#contact'
