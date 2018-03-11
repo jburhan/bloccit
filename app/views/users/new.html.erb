@@ -1,8 +1,8 @@
 <h2>Sign up</h2>
 
 <div class="row">
-  <div class="new_user">
-    <%= form_for @user do |u| %>
+  <div class="new-user">
+    <%= form_for @user, :url => { :action => :confirmation } do |u| %>
 
       <% if @user.errors.any? %>
         <div class="alert alert-danger">
@@ -26,7 +26,7 @@
       <%= form_group_tag(@user.errors[:password]) do %>
         <%= u.label :password %>
         <%= u.password_field :password, class: 'form-control', placeholder: "Enter password" %>
-      <% end %> 
+      <% end %>
       <%= form_group_tag(@user.errors[:password_confirmation]) do %>
         <%= u.label :password_confirmation %>
         <%= u.password_field :password_confirmation, class: 'form-control', placeholder: "Enter password confirmation" %>

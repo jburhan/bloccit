@@ -1,0 +1,24 @@
+<h2> Sign up confirmation </h2>
+
+<div class="row">
+
+  <div class="new-user">
+    <h4> Please confirm the values you entered </h4>
+    <p> Email: <%= @user.email %> </p>
+    <p> Name: <%= @user.name %> </p>
+
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="new-user", style="display: inline-block">
+    <%= button_to "Yes", { controller: "users", action: "create", params: { user: user_params }  }, class: 'btn btn-success' %>
+  </div>
+
+  <div class="new-user", style="display: inline-block">
+    <%= button_to "No", { controller: "users", action: "new"}, class: 'btn btn-danger', :method => :get %>
+  </div>
+
+</div>

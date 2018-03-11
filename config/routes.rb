@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
    #only hash key will prevent rails from creating other routes than new and create
    resources :users, only: [:new, :create]
+    post 'users/confirmation' => 'users#confirmation'
 
   get 'about' => 'welcome#about'
 
