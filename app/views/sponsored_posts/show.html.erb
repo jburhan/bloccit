@@ -1,0 +1,11 @@
+<h1><%= @sponsored_post.title %></h1>
+
+<div class="new-post">
+  <div class="form-group">
+    <p><%= @sponsored_post.body %></p>
+  </div>
+  <div class="edit-post">
+    <%= link_to "Edit", edit_topic_post_path(@sponsored_post.topic, @sponsored_post), class: 'btn btn-success' %>
+    <%= link_to "Delete Post", [@sponsored_post.topic, @sponsored_post], method: :delete, class: 'btn btn-danger', data: {confirm: "You are about to delete this post, proceed?"} %>
+  </div>
+</div>
