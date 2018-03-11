@@ -1,6 +1,13 @@
 class User < ApplicationRecord
-
+  #before_save allows us to register an inline callback
   before_save { self.email = email.downcase if email.present? }
+  before_save {
+    array = []
+    name.to_s.split.each do |n|
+      array.push(n.capitalize)
+    end
+    self.name = array.join(" ")
+   }
 
   validates :name, length: {minimum: 1, maximum: 50}, presence: true
 
