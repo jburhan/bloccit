@@ -10,21 +10,6 @@
   </div>
 
   <div class="new-post">
-    <%= form_for @topic do |t| %>
-      <div class="form-group">
-        <%= t.label :name %>
-        <%= t.text_field :name, class: 'form-control', placeholder: "Enter topic name" %>
-      </div>
-      <div class="form-group">
-        <%= t.label :description %>
-        <%= t.text_area :description, rows: 7, class: 'form-control', placeholder: "Enter topic description" %>
-      </div>
-      <div class="form-group">
-        <%= t.label :public, class: 'checkbox' do %>
-          <%= t.check_box :public %> Public topic
-        <% end %>
-      </div>
-      <%= t.submit "Save", class: 'btn btn-success' %>
-    <% end %>
+    <%= render partial: 'form', locals: {topic: @topic} %>
   </div>
 </div>
