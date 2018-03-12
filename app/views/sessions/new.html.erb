@@ -1,0 +1,24 @@
+include 'sessions.scss'
+
+<h2>Sign in</h2>
+
+<div class="row">
+  <div class="sign-in">
+    <%= form_for :session, url: sessions_path do |s|  %>
+      <div class="form-group">
+        <%= s.label :email %>
+        <%= s.email_field :email, autofocus: true, class: 'form-control', placeholder: "Enter email" %>
+      </div>
+      <div class="form-group">
+        <%= s.label :password %>
+        <%= s.password_field :password, class: 'form-control', placeholder: "Enter password" %>
+      </div>
+      <div class="form-group">
+        <%= s.label :remember_me, class: 'checkbox' do %>
+          Remember Me <%= s.check_box :remember_me, class: "remember-checkbox" %>
+        <% end %>
+        <%= s.submit "Sign in", class: 'btn btn-success' %>
+      </div>
+    <% end %>
+  </div>
+</div>
