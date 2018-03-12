@@ -18,7 +18,11 @@
         <li><%= link_to "About", about_path, class:"social-btn"%></li>
         <li><%= link_to "Contact", contact_path,  class:"social-btn"%></li>
         <% if current_user %>
-          <li class="pull-right"><%= link_to "#{current_user.name} -Sign Out", session_path(current_user), method: :delete %></li>
+          <div class="avatar"> <%= image_tag avatar_url(current_user) %></div>
+          <div class="pull-right">
+            <%= current_user.name %> <br>
+            <%= link_to "Sign Out", session_path(current_user), method: :delete %></li>
+          </div>
         <% else %>
           <li class="pull-right"><%= link_to "Sign In", new_session_path %></li>
           <li class="pull-right"><%= link_to "Sign Up", new_user_path %></li>
