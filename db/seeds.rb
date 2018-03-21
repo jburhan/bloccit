@@ -1,5 +1,15 @@
 require 'random_data'
 
+5.times do
+  User.create!(
+    name: RandomData.random_name,
+    email: RandomData.random_email,
+    password: RandomData.random_sentence
+  )
+end
+
+users = User.all
+
 15.times do
   Topic.create!(
     name:         RandomData.random_sentence,
@@ -16,6 +26,7 @@ topics = Topic.all
     # RandomData method will be created by ourself to create
     # random strings for title and body. This is known as "wishful coding"
     # this allow us to stay focused on one problem at a time.
+    user: users.sample,
     topic:  topics.sample,
     title: RandomData.random_sentence,
     body: RandomData.random_paragraph
@@ -28,7 +39,7 @@ end
     topic:  topics.sample,
     title: RandomData.random_sentence,
     body: RandomData.random_paragraph,
-    price: RandomData.random_number  
+    price: RandomData.random_number
   )
 end
 
@@ -58,8 +69,15 @@ end
   )
 end
 
+user = User.first
+user.update_attributes!(
+  email: 'jimmyhburhan@gmail.com',
+  password: 'helloworld'
+)
+
 
 puts "Seed finished"
+puts "#{User.count} users created"
 puts "#{Topic.count} topics created"
 puts "#{Post.count} posts created"
 puts "#{SponsoredPost.count} sponsored posts created"
