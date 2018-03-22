@@ -3,7 +3,11 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
 
-#this allow posts to be organized by date 
+  scope :ordered_by_title, -> { order( 'title DESC') }
+  scope :ordered_by_reverse_created_at, -> { order('created_at ASC') }
+
+
+#this allow posts to be organized by date
   default_scope { order('created_at DESC')}
   # makes comments dependent on posts existence
   # when posts are deleted the comments are deleted as well
