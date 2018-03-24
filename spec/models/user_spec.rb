@@ -20,6 +20,50 @@ RSpec.describe User, type: :model do
     it "should have name and email attributes with capitalized name" do
       expect(user).to have_attributes(name:"Bloccit User", email:"user@bloccit.com")
     end
+# users will respond to role
+    it "responds to role" do
+      expect(user).to respond_to(:role)
+    end
+# users will respond to admin? it will confirm whether user is an admin
+    it "responds to admin?" do
+      expect(user).to respond_to(:admin?)
+    end
+# users will respond to member?
+    it "responds to member?" do
+      expect(user).to respond_to(:member?)
+    end
+
+  describe "roles" do
+# users will be assigned a role by default
+    it "is member by default" do
+      expect(user.role).to eql("member")
+    end
+# we are testing member and admin users within separate contexts
+    context "member user" do
+      it "returns true for #member?" do
+        expect(user.member?).to be_truthy
+      end
+
+      it "returns false for #admin?" do
+        expect(user.admin?).to be_falsey
+      end
+    end
+# we are testing member and admin users within separate contexts
+    context "admin user" do
+      before do
+        user.admin!
+      end
+
+      it "returns false for #member?" do
+        expect(user.member?).to be_falsey
+      end
+
+      it "returns true for #admin?" do
+        expect(user.admin?).to be_truthy
+      end
+    end
+
+  end
 
   end
 

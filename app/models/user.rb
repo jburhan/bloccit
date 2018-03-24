@@ -10,6 +10,9 @@ class User < ApplicationRecord
     self.name = array.join(" ")
    }
 
+# ||= is a ruby trick.
+  before_save { self.role ||= :member}
+# this is a short hand  fir self.role = :member if self.role.nil?
   validates :name, length: {minimum: 1, maximum: 50}, presence: true
 
   # first validation runs if password_digest is nil, this makes sure that when we create a new user
@@ -28,5 +31,7 @@ class User < ApplicationRecord
 
   #Ruby's has_secure_password adds method to set and authenticate against a BCrypt password
   has_secure_password
+
+  enum role: [:member, :admin]
 
 end

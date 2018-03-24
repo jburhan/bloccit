@@ -9,8 +9,10 @@
   <div class="form-group">
     <p><%= @post.body %></p>
   </div>
-  <div class="edit-post">
-    <%= link_to "Edit", edit_topic_post_path(@post.topic, @post), class: 'btn btn-success' %>
-    <%= link_to "Delete Post", [@post.topic, @post], method: :delete, class: 'btn btn-danger', data: {confirm: "You are about to delete this post, proceed?"} %>
-  </div>
+  <% if user_is_authorized_for_post?(@post) %>
+    <div class="edit-post">
+      <%= link_to "Edit", edit_topic_post_path(@post.topic, @post), class: 'btn btn-success' %>
+      <%= link_to "Delete Post", [@post.topic, @post], method: :delete, class: 'btn btn-danger', data: {confirm: "You are about to delete this post, proceed?"} %>
+    </div>
+  <% end %>
 </div>
