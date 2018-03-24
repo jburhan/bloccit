@@ -1,10 +1,12 @@
 <div class="welcome-message">
   <h1>Bloccit</h1>
   <p>Bloccit is a website for you to share your thought!</p>
+  <% unless current_user %>
   <p>
     <%= link_to "Sign In", new_session_path, class: 'btn btn-primary' %> or
     <%= link_to "Sign Up", new_user_path, class: 'btn btn-primary' %> today!
   </p>
+  <% end %>
 </div>
 
 <div class="row">

@@ -1,9 +1,11 @@
 <h1><%= @topic.name %></h1>
 
- <% if user_is_authorized_for_topics? %>
+<% if current_user && user_is_authorized_to_edit? %>
   <%= link_to "Edit Topic", edit_topic_path, class: 'btn btn-success' %>
+<% end %>
+<% if current_user && user_is_admin? %>
   <%= link_to "Delete Topic", @topic, method: :delete, class: 'btn btn-danger', data: { confirm: 'You are about to delete this topic, please confirm' } %>
- <% end %>
+<% end %>
 
 <div class="row">
   <div class="col-md-8">
@@ -41,6 +43,8 @@
     <% if current_user %>
       <%= link_to "New Post", new_topic_post_path(@topic), class: 'btn btn-success' %>
     <% end %>
-    <%= link_to "New Sponsored Post", new_topic_sponsored_post_path(@topic), class: 'btn btn-success' %>
+    <% if current_user && user_is_admin? %>
+      <%= link_to "New Sponsored Post", new_topic_sponsored_post_path(@topic), class: 'btn btn-success' %>
+    <% end %>
   </div>
 </div>

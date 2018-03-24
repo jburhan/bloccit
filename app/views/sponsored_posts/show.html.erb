@@ -4,8 +4,10 @@
   <div class="form-group">
     <p><%= @sponsored_post.body %></p>
   </div>
-  <div class="edit-post">
-    <%= link_to "Edit", edit_topic_post_path(@sponsored_post.topic, @sponsored_post), class: 'btn btn-success' %>
-    <%= link_to "Delete Post", [@sponsored_post.topic, @sponsored_post], method: :delete, class: 'btn btn-danger', data: {confirm: "You are about to delete this post, proceed?"} %>
-  </div>
+  <% if current_user && user_is_admin? %>
+    <div class="edit-post">
+      <%= link_to "Edit", edit_topic_post_path(@sponsored_post.topic, @sponsored_post), class: 'btn btn-success' %>
+      <%= link_to "Delete Post", [@sponsored_post.topic, @sponsored_post], method: :delete, class: 'btn btn-danger', data: {confirm: "You are about to delete this post, proceed?"} %>
+    </div>
+  <% end %>
 </div>
