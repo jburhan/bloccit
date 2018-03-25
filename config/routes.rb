@@ -9,6 +9,11 @@ Rails.application.routes.draw do
      resources :sponsored_posts
    end
 
+# only: [] is used so we donot create any posts/:id routes
+   resources :posts, only: [] do
+     # we only add create and destroy routes
+     resources :comments, only: [:create, :destroy]
+   end
    #only hash key will prevent rails from creating other routes than new and create
   resources :users, only: [:new, :create]
     post 'users/confirmation' => 'users#confirmation'
