@@ -22,17 +22,22 @@ topics = Topic.all
 50.times do
   #having ! after a method, would instruct the method
   #to raise a problem with the data we're seeding.
-  Post.create!(
+  post = Post.create!(
     # RandomData method will be created by ourself to create
     # random strings for title and body. This is known as "wishful coding"
     # this allow us to stay focused on one problem at a time.
     user: users.sample,
-    topic:  topics.sample,
+    topic: topics.sample,
     title: RandomData.random_sentence,
     body: RandomData.random_paragraph
 
   )
+
+  post.update_attribute(:created_at, rand(10.minutes .. 1.year).ago)
+  rand(1..5).times { post.votes.create!(value: [-1, 1].sample, user: users.sample) }
 end
+
+
 
 15.times do
   SponsoredPost.create!(
@@ -99,3 +104,4 @@ puts "#{SponsoredPost.count} sponsored posts created"
 puts "#{Comment.count} comments created"
 puts "#{Advertisement.count} ads created"
 puts "#{Question.count} questions created"
+puts "#{Vote.count} votes created"
