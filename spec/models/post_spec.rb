@@ -15,6 +15,7 @@ RSpec.describe Post, type: :model do
 
   it { is_expected.to have_many(:comments) }
   it { is_expected.to have_many(:votes) }
+  it { is_expected.to have_many(:favorites) }
 
   it { is_expected.to belong_to(:topic) }
   it { is_expected.to belong_to(:user) }
@@ -38,6 +39,8 @@ RSpec.describe Post, type: :model do
   describe "voting" do
   # we are creating three upvotes and 2 downvotes before each voting spec
     before do
+      3.times { post.votes.create!(value: 1, user: user) }
+      2.times { post.votes.create!(value: -1, user: user) }
       @up_votes = post.votes.where(value: 1).count
       @down_votes = post.votes.where(value: -1).count
     end
@@ -93,7 +96,23 @@ RSpec.describe Post, type: :model do
        it "associates the vote with the owner of the post" do
          expect(post.votes.first.user).to eq(post.user)
        end
-
      end
+
+     describe "#favorite_for(post)" do
+       before do
+         topic = Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph)
+         @post = topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)
+       end
+
+       it "returns `nil` if the user has not favorited the post" do
+         expect(user.favorite_for(@post)).to be_nil
+       end
+
+       it "returns the appropriate favorite if it exists" do
+         favorite = user.favorites.where(post: @post).create
+         expect(user.favorite_for(@post)).to eq(favorite)
+       end
+     end
+     
   end
 end

@@ -5,6 +5,7 @@
 
     <% @topics.each do |topic| %>
       <%= render partial: 'topics/topic', locals: {topic: topic} %>
+      <%= topic.posts.count %> posts
     <% end %>
   </div>
   <% if current_user && user_is_admin? %>
