@@ -11,6 +11,8 @@ class Post < ApplicationRecord
 
 #this allow posts to be organized by date
   default_scope { order('rank DESC') }
+
+  scope :visible_to, -> (user) { user ? all : joins(:topic).where('topics.public' => true) }
   # makes comments dependent on posts existence
   # when posts are deleted the comments are deleted as well
 

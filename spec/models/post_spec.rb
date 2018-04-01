@@ -7,11 +7,9 @@ RSpec.describe Post, type: :model do
   let(:body) {RandomData.random_paragraph}
 
   #this allows us to create a parent topic for post
-  let(:topic) {Topic.create!(name:name, description:description)}
-
-  #this allows us to associate post with topic via topic.posts.create!
-  let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld") }
-  let(:post) { topic.posts.create!(title: title, body: body, user: user) }
+  let(:topic) { create(:topic) }
+  let(:user) { create(:user) }
+  let(:post) { create(:post) }
 
   it { is_expected.to have_many(:comments) }
   it { is_expected.to have_many(:votes) }
@@ -32,15 +30,13 @@ RSpec.describe Post, type: :model do
   # whether post will return a non-nil value when post.title and post.body is called
   describe "attributes" do
     it "has title and body attributes" do
-      expect(post).to have_attributes(title: title, body: body, user: user)
+      expect(post).to have_attributes(title: post.title, body: post.body)
     end
   end
 
   describe "voting" do
   # we are creating three upvotes and 2 downvotes before each voting spec
     before do
-      3.times { post.votes.create!(value: 1, user: user) }
-      2.times { post.votes.create!(value: -1, user: user) }
       @up_votes = post.votes.where(value: 1).count
       @down_votes = post.votes.where(value: -1).count
     end
@@ -99,20 +95,16 @@ RSpec.describe Post, type: :model do
      end
 
      describe "#favorite_for(post)" do
-       before do
-         topic = Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph)
-         @post = topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)
-       end
 
        it "returns `nil` if the user has not favorited the post" do
-         expect(user.favorite_for(@post)).to be_nil
+         expect(user.favorite_for(post)).to be_nil
        end
 
        it "returns the appropriate favorite if it exists" do
-         favorite = user.favorites.where(post: @post).create
-         expect(user.favorite_for(@post)).to eq(favorite)
+         favorite = user.favorites.where(post: post).create
+         expect(user.favorite_for(post)).to eq(favorite)
        end
      end
-     
+
   end
 end

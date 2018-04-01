@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:user) {User.create!(name:"bloccit user", email:"user@bloccit.com", password: "password")}
+  let(:user) { create(:user) }
 
   it { is_expected.to have_many(:votes) }
   it { is_expected.to have_many(:comments) }
@@ -22,7 +22,7 @@ RSpec.describe User, type: :model do
 
   describe "attributes" do
     it "should have name and email attributes with capitalized name" do
-      expect(user).to have_attributes(name:"Bloccit User", email:"user@bloccit.com")
+      expect(user).to have_attributes(name: user.name, email: user.email)
     end
 # users will respond to role
     it "responds to role" do
@@ -106,8 +106,8 @@ RSpec.describe User, type: :model do
 
 
   describe "invalid user" do
-    let(:user_with_invalid_name) { User.new(name: "", email: "user@bloccit.com") }
-    let(:user_with_invalid_email) { User.new(name: "Bloccit User", email: "") }
+    let(:user_with_invalid_name) { build(:user, name: "") }
+    let(:user_with_invalid_email) { build(:user, email: "") }
 
     it "should be an invalid user due to blank name" do
       expect(user_with_invalid_name).to_not be_valid
@@ -118,5 +118,15 @@ RSpec.describe User, type: :model do
     end
 
   end
+
+# . in .avatar_url is a class method
+  describe ".avatar_url" do
+     let(:known_user) { create(:user, email: "blochead@bloc.io") }
+
+     it "returns the proper Gravatar url for a known email entity" do
+       expected_gravatar = "http://gravatar.com/avatar/bb6d1172212c180cfbdb7039129d7b03.png?s=48"
+       expect(known_user.avatar_url(48)).to eq(expected_gravatar)
+     end
+   end
 
 end
