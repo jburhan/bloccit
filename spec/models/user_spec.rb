@@ -117,6 +117,11 @@ RSpec.describe User, type: :model do
       expect(user_with_invalid_email).to_not be_valid
     end
 
+    it "adds the favorite to the user account" do
+      favorite = user.favorites.where(post: @post).create
+      expect(user.favorites.any?).to be_truthy
+    end
+
   end
 
 # . in .avatar_url is a class method

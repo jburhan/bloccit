@@ -23,5 +23,5 @@ class VotesController < ApplicationController
       @vote = current_user.votes.create(value: new_value, post: @post)
     end
   end
-  
+
 end
