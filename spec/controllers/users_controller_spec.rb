@@ -61,14 +61,12 @@ RSpec.describe UsersController, type: :controller do
     end
 
     describe "not signed in" do
- # #1
      let(:factory_user) { create(:user) }
 
      before do
        post :create, params: { user: new_user_attributes }
      end
 
- # #2
      it "returns http success" do
        get :show, params: { id: factory_user.id }
        expect(response).to have_http_status(:success)
