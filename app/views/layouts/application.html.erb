@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Bloccit</title>
+    <title>Jimmidit</title>
     <%= csrf_meta_tags %>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,7 +13,7 @@
 
     <div class="container">
       <ul class="nav nav-tabs">
-        <li><%= link_to "Bloccit", root_path, class:"social-btn" %></li>
+        <li><%= link_to "Jimmidit", root_path, class:"social-btn" %></li>
         <li><%= link_to "Topics", topics_path %></li>
         <li><%= link_to "About", about_path, class:"social-btn"%></li>
         <li><%= link_to "Contact", contact_path,  class:"social-btn"%></li>
@@ -39,7 +39,6 @@
           <button type="button" class="close" data-dismiss="alert">&times;</button>
           <%= flash[:alert] %>
         </div>
-
       <% end %>
 
     <%= yield %>
